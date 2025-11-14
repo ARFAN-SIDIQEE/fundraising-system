@@ -144,7 +144,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy...
 
 - **Project Maintainer**: [ARFAN SIDIQEE]
 - **Email**: arfansidiqee@gmail.com
-- **GitHub**: [[@yourusername](https://github.com/ARFAN-SIDIQEE)](https://github.com/[yourusername](https://github.com/ARFAN-SIDIQEE))
+- **GitHub**: [(https://github.com/ARFAN-SIDIQEE)][https://github.com/ARFAN-SIDIQEE/fundraising-system]
 
 ---
 
