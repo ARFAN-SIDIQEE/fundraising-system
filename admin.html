@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+    <section id="admin-dashboard" class="section hidden">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <div>
+                    <span id="admin-welcome" style="margin-right:15px; color:#666;">Welcome</span>
+                    <button class="btn btn-danger" onclick="adminLogout()">Logout</button>
+                </div>
+            </div>
+            <div class="dashboard">
+                <div class="sidebar">
+                    <h3>Admin Menu</h3>
+                    <ul>
+                        <li><a href="#" class="active" onclick="showAdminSection('pending-claims')">Pending Claims</a>
+                        </li>
+                        <li><a href="#" onclick="showAdminSection('all-claims')">All Claims</a></li>
+                        <li><a href="#" onclick="showAdminSection('manage-users')">Manage Users</a></li>
+                        <li><a href="#" onclick="showAdminSection('send-message')">Send Messages</a></li>
+                        <li><a href="#" onclick="showAdminSection('donation-management')">Donation Management</a></li>
+                        <li><a href="#" onclick="showAdminSection('system-stats')">System Statistics</a></li>
+                        <li><a href="#" onclick="showAdminSection('department-contact')">Department Contact</a></li>
+                    </ul>
+                </div>
+                <div class="dashboard-content">
+                    <!-- Pending Claims -->
+                    <div id="pending-claims-section">
+                        <h3>Pending Claims</h3>
+                        <div id="pending-claims-list"></div>
+                    </div>
+                    <!-- All Claims -->
+                    <div id="all-claims-section" class="hidden">
+                        <h3>All Claims</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Claimer</th>
+                                    <th>Amount</th>
+                                    <th>Dept</th>
+                                    <th>Sem</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-claims-list"></tbody>
+                        </table>
+                    </div>
+                    <!-- Manage Users -->
+                    <div id="manage-users-section" class="hidden">
+                        <h3>User Management</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Reg Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-list"></tbody>
+                        </table>
+                    </div>
+                    <!-- Send Message -->
+                    <div id="send-message-section" class="hidden">
+                        <h3>Send Broadcast</h3>
+                        <div id="message-alert" class="alert hidden"></div>
+                        <form id="message-form">
+                            <select id="message-recipient" class="form-control" required>
+                                <option value="all">All</option>
+                                <option value="claimers">Students</option>
+                                <option value="donors">Donors</option>
+                            </select>
+                            <input type="text" id="message-subject" class="form-control" placeholder="Subject" required>
+                            <textarea id="message-content" class="form-control" rows="5" placeholder="Message"
+                                required></textarea>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                        <h4 style="margin-top:30px;">Sent Messages</h4>
+                        <div id="sent-messages-list"></div>
+                    </div>
+                    <!-- Donation Management -->
+                    <div id="donation-management-section" class="hidden">
+                        <h3>Donations</h3>
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <h4>Total Funds</h4>
+                                <p id="total-funds" class="stat-number">PKR0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Total Donations</h4>
+                                <p id="total-donations" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Active Claims</h4>
+                                <p id="active-claims" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Donor</th>
+                                    <th>Student</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>TID</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-donations-list"></tbody>
+                        </table>
+                    </div>
+                    <!-- System Stats -->
+                    <div id="system-stats-section" class="hidden">
+                        <h3>System Stats</h3>
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <h4>Total Users</h4>
+                                <p id="total-users" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Total Claims</h4>
+                                <p id="total-claims" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Approval Rate</h4>
+                                <p id="approval-rate" class="stat-number">0%</p>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Active Donors</h4>
+                                <p id="active-donors" class="stat-number">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Department Contact -->
+                    <div id="department-contact-section" class="hidden">
+                        <h3>Department Contact</h3>
+                        <button class="btn btn-primary" onclick="openAddDeptModal()">Add Department</button>
+                        <table style="margin-top:20px;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Department</th>
+                                    <th>HOD No</th>
+                                    <th>Clerk No</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dept-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Department Modal -->
+    <div id="dept-modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Add Department</h3>
+            <form id="dept-form">
+                <input type="hidden" id="dept-id">
+                <div class="form-group"><label>Department Name</label><input type="text" id="dept-name"
+                        class="form-control" required></div>
+                <div class="form-group"><label>HOD Contact</label><input type="text" id="dept-hod" class="form-control"
+                        required></div>
+                <div class="form-group"><label>Clerk Contact</label><input type="text" id="dept-clerk"
+                        class="form-control" required></div>
+                <div style="text-align:right; margin-top:15px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeDeptModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Admin Dashboard</p>
+        </div>
+    </footer>
+    <script src="admin-script.js"></script>
+</body>
+
+</html>
