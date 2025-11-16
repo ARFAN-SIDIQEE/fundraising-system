@@ -9,6 +9,18 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #7209b7;
+    --accent: #f72585;
+    --light: #f8fafc;
+    --dark: #3b6894;
+    --success: #4cc9f0;
+    --border-radius: 12px;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -22,6 +34,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 
 /* ========================================
    TYPOGRAPHY
@@ -150,20 +163,25 @@ nav {
     transform: translateY(-2px);
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 4px 0;
+    transition: 0.3s;
+}
+
 /* ========================================
    HERO SECTION
    ======================================== */
-:root {
-    --primary: #4361ee;
-    --primary-dark: #3a56d4;
-    --secondary: #7209b7;
-    --accent: #f72585;
-    --light: #f8fafc;
-    --dark: #212529;
-    --success: #4cc9f0;
-    --border-radius: 12px;
-    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+
 
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -240,7 +258,7 @@ nav {
    BUTTONS */
 .btn {
     display: inline-block;
-    background: var(--secondary);
+    background: rgb(209, 15, 15);
     color: white;
     padding: 12px 25px;
     border: none;
@@ -259,29 +277,6 @@ nav {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary {
-    background: var(--primary);
-}
-
-.btn-primary:hover {
-    background: #2980b9;
-}
-
-.btn-danger {
-    background: var(--danger);
-}
-
-.btn-danger:hover {
-    background: #c0392b;
-}
-
-.btn-warning {
-    background: var(--warning);
-}
-
-.btn-warning:hover {
-    background: #e67e22;
-}
 
 .section-title {
     text-align: center;
@@ -298,7 +293,7 @@ nav {
 }
 
 .card {
-    background: white;
+    background: #e1e4e6;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -312,7 +307,7 @@ nav {
 }
 
 .card h3 {
-    color: var(--primary);
+    color: red;
     margin-bottom: 15px;
     font-size: 1.4rem;
     font-weight: 600;
@@ -345,8 +340,9 @@ nav {
 }
 
 .quote-card {
-    background: linear-gradient(135deg, var(--primary), var(--dark));
+    background: linear-gradient(135deg);
     color: white;
+    background-color: #2a506a;
     text-align: center;
     padding: 1px;
     position: relative;
@@ -771,6 +767,47 @@ footer p {
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: #4d83ba;
+        flex-direction: column;
+        padding: 1rem 0;
+        transition: left 0.3s ease;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .section h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .section h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 992px) {
     .dashboard {
         grid-template-columns: 1fr;
@@ -782,9 +819,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
 
     .hero h1 {
         font-size: 2.2rem;
